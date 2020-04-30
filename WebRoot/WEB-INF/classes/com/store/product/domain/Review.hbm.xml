@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.store.product.domain.Review" table="review">
+		<id name="rid">
+			<generator class="native"/>
+		</id>
+		<property name="rname"/>
+		<property name="quality"/>
+		<property name="rtext"/>
+		<property name="reviewtime"/>
+		
+		<!-- 与商品表关系 -->
+		<many-to-one name="product" class="com.store.product.domain.Product" column="pid"></many-to-one>
+		
+	</class>
+</hibernate-mapping>

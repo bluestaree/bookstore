@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<!-- 注册的服务器端验证  -->
+<validators>
+	<field name="username">
+		<field-validator type="requiredstring">
+			<message>请输入用户名!</message>
+		</field-validator>
+	</field>
+	
+	<field name="password">
+		<field-validator type="requiredstring">
+			<!-- 使用注入取消trim(去掉字符两端空格) -->
+			<param name="trim">false</param>
+			<message>请输入密码!</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">3</param>
+			<param name="maxLength">8</param>
+			<message>密码长度为3-8位!</message>
+		</field-validator>
+	</field>
+	 
+	<field name="email">
+		<field-validator type="email">
+			<message>邮箱格式不正确!</message>
+		</field-validator>
+	</field>
+</validators>

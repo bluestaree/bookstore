@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.store.product.domain.Product" table="product">
+		<id name="pid">
+			<generator class="native"/>
+		</id>
+		<property name="pname"/>
+		<property name="author"/>
+		<property name="press"/>
+		<property name="market_price"/>
+		<property name="shop_price"/>
+		<property name="image"/>
+		<property name="spoint"/>
+		<property name="pdesc"/>
+		<property name="adesc"/>
+		<property name="is_hot"/>
+		<property name="pdate"/>
+		
+		<!-- 二级分类与商品的关联 -->
+		<many-to-one name="categorySecond" lazy="false" class="com.store.categorysecond.domain.CategorySecond" column="csid"></many-to-one>
+		
+		<!-- 评论与商品的关联 -->
+		<set name="reviews" order-by="rid" lazy="false">
+		 	<key column="pid" />
+		 	<one-to-many class="com.store.product.domain.Review"/>
+		</set>
+	</class>
+</hibernate-mapping>

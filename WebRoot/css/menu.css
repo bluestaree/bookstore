@@ -1,0 +1,8 @@
+/* menu */
+.menu{height:50px;overflow:hidden;}
+.menu ul li{float:left;position:relative;text-align:center;line-height:20px;height:50px;overflow:hidden;}
+.menu ul li a{position:relative;/* 必要元素 */display:block;width:35px;height:50px;font-size:14px;text-decoration:none;cursor:pointer;}
+.menu ul li a span{position:absolute;/* 必要元素 */left:5px;width:80px;}
+.menu ul li a span.out{top:0px;}
+.menu ul li a span.over,.menu ul li a span.bg{top:-45px;}
+

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置常量 -->
+    <constant name="struts.devMode" value="false" />
+	<!-- 标签主题：简单风格 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 配置全局消息资源包(用于显示上传时回显中文错误信息) -->
+	<constant name="struts.custom.i18n.resources" value="com.store.product.adminaction.fileupload_message"></constant>
+		
+	<package name="store" extends="struts-default" namespace="/">
+		<!-- 声明自定义拦截器 -->
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.store.interceptor.LoginInterceptor"></interceptor>
+		</interceptors>
+		
+		<!-- 配置全局结果视图 -->
+		<global-results>
+			<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+			<result name="adminLogin">/admin/index.jsp</result>
+		</global-results>
+	
+		<!-- 配置访问首页时的action -->
+		<action name="index" class="com.store.index.action.IndexAction">
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		
+		<!-- 用户模块action -->
+		<action name="user_*" class="com.store.user.action.UserAction" method="{1}">
+			<result name="registPage">/WEB-INF/jsp/regist.jsp</result>
+			<result name="input">/WEB-INF/jsp/regist.jsp</result>
+			<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="loginSuccess" type="redirectAction">index</result>
+			<result name="quit" type="redirectAction">index</result>
+			<result name="userCenterPage">/WEB-INF/jsp/user_center.jsp</result>
+			<result name="checkcodeFail">/WEB-INF/jsp/regist.jsp</result>
+			<result name="findLikeByUid">/WEB-INF/jsp/wishlist.jsp</result>
+			<result name="cancelLike" type="redirectAction">
+				<param name="actionName">user_findLikeByUid</param>
+				<param name="namespace">/</param>
+				<param name="page">1</param>
+				<param name="limit">6</param>
+			</result>
+		</action>
+		
+		<!-- 验证码action -->
+		<action name="checkImg" class="com.store.user.action.CheckImgAction"></action>
+		
+		<!-- 商品模块action -->
+		<action name="product_*" class="com.store.product.action.ProductAction" method="{1}">
+			<result name="findByPid">/WEB-INF/jsp/product_page.jsp</result>
+			<result name="catalogGrid">/WEB-INF/jsp/catalog_grid.jsp</result>
+			<result name="catalogList">/WEB-INF/jsp/catalog_list.jsp</result>
+			<result name="related">/WEB-INF/jsp/related.jsp</result>
+			<result name="findAll">/WEB-INF/jsp/product_list.jsp</result>
+			<result name="search">/WEB-INF/jsp/search_list.jsp</result>
+		</action>
+		
+		<!-- 购物车action -->
+		<action name="cart_*" class="com.store.cart.action.CartAction" method="{1}">
+			<result name="addCart">/WEB-INF/jsp/shopping_cart.jsp</result>
+			<result name="updateCart">/WEB-INF/jsp/shopping_cart.jsp</result>
+			<result name="clearCart">/WEB-INF/jsp/shopping_cart.jsp</result>
+			<result name="removeCart">/WEB-INF/jsp/shopping_cart.jsp</result>
+			<result name="cartPage">/WEB-INF/jsp/shopping_cart.jsp</result>
+		</action>
+		
+		<!-- 订单action -->
+		<action name="order_*" class="com.store.order.action.OrderAction" method="{1}">
+			<result name="save">/WEB-INF/jsp/order.jsp</result>
+			<result name="cartEmpty" type="redirectAction">cart_cartPage</result>
+			<result name="orderList">/WEB-INF/jsp/orderList.jsp</result>
+			<result name="findByOid">/WEB-INF/jsp/order.jsp</result>
+			<result name="updateState" type="redirectAction">order_findByUid?page=1</result>
+		</action>
+		
+		<!-- 后台管理用户action -->
+		<action name="adminUser_*" class="com.store.adminuser.action.AdminUserAction" method="{1}">
+			<!-- 添加自定义的拦截器 -->
+			<interceptor-ref name="loginInterceptor">
+				<!-- excludeMethods：配置不需要拦截的方法 -->
+				<param name="excludeMethods">login</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="login">/admin/index.jsp</result>
+			<result name="loginSuccess" type="redirect">/admin/home.jsp</result>
+			<result name="quit" type="redirect">/admin/index.jsp</result>
+			<result name="findAll">/admin/user/adminuser_list.jsp</result>
+			<result name="editPage">/admin/user/adminuser_edit.jsp</result>
+			<result name="editFail">/admin/user/adminuser_list.jsp</result>
+			<result name="editSuccess">/admin/user/adminuser_list.jsp</result>
+			<result name="saveSuccess" type="redirectAction">adminUser_findAll</result>
+			<result name="deleteSuccess" type="redirectAction">adminUser_findAll</result>
+			<result name="statistics">/admin/statistics/list.jsp</result>
+		</action>
+		
+		<!-- 后台普通用户action -->
+		<action name="adminGeneralUser_*" class="com.store.user.adminaction.AdminGeneralUserAction" method="{1}">
+			<!-- 添加自定义的拦截器 -->
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="findAll">/admin/user/user_list.jsp</result>
+			<result name="saveSuccess" type="redirectAction">adminGeneralUser_findAll?page=1</result>
+			<result name="editPage">/admin/user/user_edit.jsp</result>
+			<result name="editSuccess" type="redirectAction">adminGeneralUser_findAll?page=1</result>
+			<result name="deleteSuccess" type="redirectAction">adminGeneralUser_findAll?page=1</result>
+		</action>
+		
+		<!-- 后台一级分类管理action -->
+		<action name="adminCategory_*" class="com.store.category.adminaction.AdminCategoryAction" method="{1}">
+			<!-- 添加自定义的拦截器 -->
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="findAll">/admin/category/category_list.jsp</result>
+			<result name="saveSuccess" type="redirectAction">adminCategory_findAll</result>
+			<result name="deleteSuccess" type="redirectAction">adminCategory_findAll</result>
+			<result name="editPage">/admin/category/edit.jsp</result>
+			<result name="editSuccess" type="redirectAction">adminCategory_findAll</result>
+		</action>
+		
+		<!-- 后台二级分类管理action -->
+		<action name="adminCategorySecond_*" class="com.store.categorysecond.adminaction.AdminCategorySecondAction" method="{1}">
+			<!-- 添加自定义的拦截器 -->
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="findAll">/admin/categorysecond/categorysecond_list.jsp</result>
+			<result name="addPage">/admin/categorysecond/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">adminCategorySecond_findAll?page=1</result>
+			<result name="deleteSuccess" type="redirectAction">adminCategorySecond_findAll?page=1</result>
+			<result name="editPage">/admin/categorysecond/edit.jsp</result>
+			<result name="editSuccess" type="redirectAction">adminCategorySecond_findAll?page=1</result>
+		</action>
+		
+		<!-- 后台商品管理action -->
+		<action name="adminProduct_*" class="com.store.product.adminaction.AdminProductAction" method="{1}">
+			<!-- 添加自定义的拦截器 -->
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack">
+				<!-- 限制上传文件的扩展名 -->
+				<param name="fileUpload.allowedExtensions">.jpg,.png,.bmp</param>
+			</interceptor-ref>
+			<result name="findAll">/admin/product/product_list.jsp</result>
+			<result name="addPage">/admin/product/add.jsp</result>
+			<result name="input">/admin/product/add.jsp</result> <!-- 上传文件失败回显数据页面 -->
+			<result name="saveSuccess" type="redirectAction">adminProduct_findAll?page=1</result>
+			<result name="deleteSuccess" type="redirectAction">adminProduct_findAll?page=1</result>
+			<result name="editPage">/admin/product/edit.jsp</result>
+			<result name="editSuccess" type="redirectAction">adminProduct_findAll?page=1</result>
+		</action>
+		
+		<!-- 后台订单管理action -->
+		<action name="adminOrder_*" class="com.store.order.adminaction.AdminOrderAction" method="{1}">
+			<!-- 添加自定义的拦截器 -->
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="findAll">/admin/order/order_list.jsp</result>
+			<result name="findOrderItem">/admin/order/orderItem.jsp</result>
+			<result name="updateState" type="redirectAction">adminOrder_findAll?page=1</result>
+		</action>
+	</package>
+</struts>

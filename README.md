@@ -28,10 +28,7 @@
 1.前端截图
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-1.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-2.png)
-![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-3.png)
-![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-4.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-5.png)
-![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-6.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-7.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-8.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-9.png)

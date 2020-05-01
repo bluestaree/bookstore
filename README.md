@@ -17,12 +17,12 @@ Spring+ Struts 2 + Hibernate + MySQL +Tomcat + JSP + jQuery
 
 # 相关截图
 
-1.前端截图
+- 前端截图
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-1.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-2.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-5.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-7.png)
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-8.png)
 
-2.后台截图
+- 后台截图
 ![image](https://github.com/bluestaree/bookstore/blob/master/WebRoot/image/public/4-10.png)

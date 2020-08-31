@@ -13,53 +13,53 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 /**
- * ·¢ËÍÓÊ¼ş¹¤¾ßÀà
+ * å‘é€é‚®ä»¶å·¥å…·ç±»
  * @author dhw
  *
  */
 public class MailUitls {
 	/**
-	 * ·¢ËÍÓÊ¼şµÄ·½·¨
-	 * @param to	:ÊÕ¼şÈË
-	 * @param code	:¼¤»îÂë
+	 * å‘é€é‚®ä»¶çš„æ–¹æ³•
+	 * @param to	:æ”¶ä»¶äºº
+	 * @param code	:æ¿€æ´»ç 
 	 */
 	public static void sendMail(String to,String code){
 		/**
-		 * 1.»ñµÃÒ»¸öSession¶ÔÏó.
-		 * 2.´´½¨Ò»¸ö´ú±íÓÊ¼şµÄ¶ÔÏóMessage.
-		 * 3.·¢ËÍÓÊ¼şTransport
+		 * 1.è·å¾—ä¸€ä¸ªSessionå¯¹è±¡.
+		 * 2.åˆ›å»ºä¸€ä¸ªä»£è¡¨é‚®ä»¶çš„å¯¹è±¡Message.
+		 * 3.å‘é€é‚®ä»¶Transport
 		 */
-		// 1.»ñµÃÁ¬½Ó¶ÔÏó
+		// 1.è·å¾—è¿æ¥å¯¹è±¡
 		Properties props = new Properties();
 		props.setProperty("mail.smtp.auth", "true");
 		props.setProperty("mail.debug", "true");
-		props.setProperty("mail.host", "smtp.163.com");	//·¢ËÍÓÊÏäµØÖ·
-		props.setProperty("mail.transport.protocol", "smtp");	//·¢ËÍÓÊÏäĞ­ÒéÃû³Æ
+		props.setProperty("mail.host", "smtp.163.com");	//å‘é€é‚®ç®±åœ°å€
+		props.setProperty("mail.transport.protocol", "smtp");	//å‘é€é‚®ç®±åè®®åç§°
 		Session session = Session.getInstance(props, new Authenticator() {
 
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("18750515830", "qq1013393078");
+				return new PasswordAuthentication("1875******0", "*******");	//è¿™é‡Œå¡«é‚®ç®±çš„è´¦å·åˆå¯†ç 
 			}
 			
 		});
-		// 2.´´½¨ÓÊ¼ş¶ÔÏó:
+		// 2.åˆ›å»ºé‚®ä»¶å¯¹è±¡:
 		Message message = new MimeMessage(session);
 		try {
-			// ÉèÖÃ·¢¼şÈË:
+			// è®¾ç½®å‘ä»¶äºº:
 			message.setFrom(new InternetAddress("18750515830@163.com"));
-			// ÉèÖÃÊÕ¼şÈË:
+			// è®¾ç½®æ”¶ä»¶äºº:
 			message.addRecipient(RecipientType.TO, new InternetAddress(to));
-			// ÉèÖÃ±êÌâ
-			message.setSubject("À´×ÔBookStoreÍøÉÏÍ¼Êé¹ºÎïÉÌ³ÇµÄ¹Ù·½¼¤»îÓÊ¼ş");
-			// ÉèÖÃÓÊ¼şÕıÎÄ:
-			message.setContent("<table><tr><td><h3>ÄúºÃ£¬»¶Ó­Äú¼ÓÈëBookStoreÍ¼Êé¹ºÎïÉÌ³Ç!</h3></td></tr>" +
-					"<tr><td><h4>ÏÖÔÚÄã¿ÉÒÔÏíÊÜÒÔÏÂ·şÎñ</h4>" +
-					"<ul> <li>ÕıÆ·±£ÕÏ¡¢Õı¹æ·¢Æ±</li><li>»õµ½¸¶¿î¡¢»áÔ±·şÎñ</li><li>×ÔÓÉÍË»¹¡¢ËÍ»õÉÏÃÅ</li></ul></td></tr>" +
-					"<tr><td><h4>Çëµã»÷ÏÂÃæµÄÁ´½ÓÍê³ÉÓÃ»§¼¤»î²Ù×÷!</h4></td></tr>" +
-					"<tr><td><h4><a href='http://localhost:8080/bookstore/user_active?code="+code+"'>µã»÷´Ë´¦Íê³É¼¤»î¡£http://localhost:8080/bookstore/user_active?code="+code+"</a></h4></td></tr>" +
+			// è®¾ç½®æ ‡é¢˜
+			message.setSubject("æ¥è‡ªBookStoreç½‘ä¸Šå›¾ä¹¦è´­ç‰©å•†åŸçš„å®˜æ–¹æ¿€æ´»é‚®ä»¶");
+			// è®¾ç½®é‚®ä»¶æ­£æ–‡:
+			message.setContent("<table><tr><td><h3>æ‚¨å¥½ï¼Œæ¬¢è¿æ‚¨åŠ å…¥BookStoreå›¾ä¹¦è´­ç‰©å•†åŸ!</h3></td></tr>" +
+					"<tr><td><h4>ç°åœ¨ä½ å¯ä»¥äº«å—ä»¥ä¸‹æœåŠ¡</h4>" +
+					"<ul> <li>æ­£å“ä¿éšœã€æ­£è§„å‘ç¥¨</li><li>è´§åˆ°ä»˜æ¬¾ã€ä¼šå‘˜æœåŠ¡</li><li>è‡ªç”±é€€è¿˜ã€é€è´§ä¸Šé—¨</li></ul></td></tr>" +
+					"<tr><td><h4>è¯·ç‚¹å‡»ä¸‹é¢çš„é“¾æ¥å®Œæˆç”¨æˆ·æ¿€æ´»æ“ä½œ!</h4></td></tr>" +
+					"<tr><td><h4><a href='http://localhost:8080/bookstore/user_active?code="+code+"'>ç‚¹å‡»æ­¤å¤„å®Œæˆæ¿€æ´»ã€‚http://localhost:8080/bookstore/user_active?code="+code+"</a></h4></td></tr>" +
 							"<tr><td>BookStore</td></tr></table>", "text/html;charset=UTF-8");
-			// 3.·¢ËÍÓÊ¼ş:
+			// 3.å‘é€é‚®ä»¶:
 			Transport.send(message);
 		} catch (AddressException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class MailUitls {
 		
 	}
 	
-	//²âÊÔÓÃ
+	//æµ‹è¯•ç”¨
 	public static void main(String[] args) {
 		sendMail("924201320@qq.com","11111111111111");
 	}
